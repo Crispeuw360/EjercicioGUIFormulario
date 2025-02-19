@@ -5,10 +5,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -126,12 +129,37 @@ public class VentanaFormulario extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(!textField1.getText().equalsIgnoreCase("")&&!textField2.getText().equalsIgnoreCase("")&&!botonProfesor.isSelected()||!botonAlumno.isSelected()&&!boxCastellano.isSelected()||!boxEuskera.isSelected()||!boxIngles.isSelected())
+		String rol="";
+		ArrayList<String> idiomas = new ArrayList<>();
+		
+		
+		if(textField1.getText().equalsIgnoreCase("")||textField2.getText().equalsIgnoreCase(""))
 		{
-			
+			JOptionPane.showMessageDialog(contentPane, "Error");
 		}else
 		{
+			if(botonProfesor.isSelected())
+			{
+				rol ="Profesor";
+			}else if(botonAlumno.isSelected())
+			{
+				rol ="Alumno";
+			}
+			if(boxCastellano.isSelected())
+			{
+				idiomas.add("Castellano");
+			}
+			if(boxEuskera.isSelected())
+			{
+				idiomas.add("Euskera");
+			}if(boxIngles.isSelected())
+			{
+				idiomas.add("Ingles");
+			}
+			if(e.getSource()==botonEnviar)
+			{
+				JOptionPane.showMessageDialog(contentPane,idiomas.toString()+" son los idiomas que conoces" ,"Bienvenido "+rol+" "+textField1.getText()+" "+textField2.getText(),JOptionPane.INFORMATION_MESSAGE );
+			}
 			
 		}
 	}
